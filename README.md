@@ -33,19 +33,26 @@ En la imagen Steve compra un monitor y una lavadora, pero a la hora de acercarse
 ```
 dotnet new sln -o Payment
 ```
+![image](https://github.com/user-attachments/assets/e638dfa3-be00-421b-9157-ccbb72544be9)
+
 3. Acceder a la solución creada y ejecutar el siguiente comando para crear una nueva libreria de clases y adicionarla a la solución actual.
 ```
 cd Payment
 dotnet new classlib -o Payment.Domain
 dotnet sln add ./Payment.Domain/Payment.Domain.csproj
 ```
+![image](https://github.com/user-attachments/assets/75b50be6-10c3-4549-8d16-ad5aeaa57a24)
+
 4. Ejecutar el siguiente comando para crear un nuevo proyecto de pruebas y adicionarla a la solución actual
 ```
 dotnet new nunit -o Payment.Domain.Tests
 dotnet sln add ./Payment.Domain.Tests/Payment.Domain.Tests.csproj
 dotnet add ./Payment.Domain.Tests/Payment.Domain.Tests.csproj reference ./Payment.Domain/Payment.Domain.csproj
 ```
+![image](https://github.com/user-attachments/assets/f869a06a-91ef-49f0-9828-9d8bb8f95f03)
+
 5. Iniciar Visual Studio Code (VS Code) abriendo el folder de la solución como proyecto. En el proyecto Payment.Domain, si existe un archivo Class1.cs proceder a eliminarlo. Asimismo en el proyecto Payment.Domain.Tests si existiese un archivo UnitTest1.cs, también proceder a eliminarlo.
+![image](https://github.com/user-attachments/assets/c486eace-6eae-4841-8482-cf87a8c50e78)
 
 6. Primero se necesita implementar la interfaz que servirá de ESTRATEGIA base para las posibles implementaciones de pagos. Por eso en VS Code, en el proyecto Notifications.Domain proceder a crear el archivo IPaymentStrategy.cs :
 ```C#
@@ -57,6 +64,8 @@ namespace Payment.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/67091763-c2f9-4c15-8542-7df4c3f503d1)
+
 7. Ahora proceder a implementar las clases concretas o implementaciones a partir de la interfaz creada, Para esto en el proyecto Payment.Domain proceder a crear los archivos siguientes:
 > CreditCardPaymentStrategy.cs
 ```C#
@@ -72,6 +81,8 @@ namespace Payment.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/fbacbbcf-7b45-43a7-9dba-7c72a6c9681b)
+
 > DebitCardPaymentStrategy.cs
 ```C#
 namespace Payment.Domain
@@ -86,6 +97,8 @@ namespace Payment.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/3db52966-b866-40ae-98b4-9847dc5c34df)
+
 > CashPaymentStrategy.cs
 ```C#
 namespace Payment.Domain
@@ -100,6 +113,8 @@ namespace Payment.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/0babec2b-eeb2-489b-a783-9421bc92245b)
+
 8. Seguidamente crear la clase que funcionara de contexto y permitira la ejecución de cualquier estrategia, por lo que en el proyecto de Payment.Domain se debe agregar el archivo PaymentContext.cs con el siguiente código:
 ```C#
 namespace Payment.Domain
@@ -124,6 +139,8 @@ namespace Payment.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/7a546c2f-a102-4782-8990-d5818793ba2a)
+
 9. Adicionalmente para facilitar la utilización de las diferentes estrategias adicionaremos una fachada, para eso crear el archivo PaymentService.cs en el proyecto Payment.Domain:
 ```C#
 namespace Payment.Domain
@@ -162,6 +179,8 @@ namespace Payment.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/64ba6745-d8b6-4260-a01c-73878a9c89c7)
+
 10. Ahora proceder a implementar unas pruebas para verificar el correcto funcionamiento de la aplicación. Para esto al proyecto Payment.Domain.Tests adicionar el archivo PaymentTests.cs y agregar el siguiente código:
 ```C#
 using System;
@@ -190,14 +209,19 @@ namespace Payment.Domain.Tests
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/f0a37b66-13b1-40e4-92ea-c07de1c5a997)
+
 11. Ahora necesitamos comprobar las pruebas contruidas para eso abrir un terminal en VS Code (CTRL + Ñ) o vuelva al terminal anteriormente abierto, y ejecutar los comandos:
 ```Bash
 dotnet test --collect:"XPlat Code Coverage"
 ```
+![image](https://github.com/user-attachments/assets/105788a0-d932-49b6-b119-ed9f25af12f8)
+
 12. Si las pruebas se ejecutaron correctamente debera aparcer un resultado similar al siguiente:
 ```Bash
 Passed!  - Failed:     0, Passed:     4, Skipped:     0, Total:     4, Duration: 12 ms
 ```
+![image](https://github.com/user-attachments/assets/55a2eaab-8a97-453c-906c-005a5a2f5676)
 
 13. Finalmente se puede apreciar que existen tres componentes principales en el patrón ESTARTEGIA:
 a. Estrategia: declarada en una interfac para ser implementada para todos los algoritmos soportado
@@ -220,19 +244,26 @@ dll2mmd -f Payment.Domain/bin/Debug/net7.0/Payment.Domain.dll -o payment.md
 ```
 dotnet new sln -o ATM
 ```
+![image](https://github.com/user-attachments/assets/e79dfcab-eb09-490a-bd32-3e1c2d1714aa)
+
 3. Acceder a la solución creada y ejecutar el siguiente comando para crear una nueva libreria de clases y adicionarla a la solución actual.
 ```
 cd ATM
 dotnet new classlib -o ATM.Domain
 dotnet sln add ./ATM.Domain/ATM.Domain.csproj
 ```
+![image](https://github.com/user-attachments/assets/17e3329b-0e35-460a-a67e-798e7c02b851)
+
 4. Ejecutar el siguiente comando para crear un nuevo proyecto de pruebas y adicionarla a la solución actual
 ```
 dotnet new nunit -o ATM.Domain.Tests
 dotnet sln add ./ATM.Domain.Tests/ATM.Domain.Tests.csproj
 dotnet add ./ATM.Domain.Tests/ATM.Domain.Tests.csproj reference ./ATM.Domain/ATM.Domain.csproj
 ```
+![image](https://github.com/user-attachments/assets/60b557e0-31c0-42bc-afb9-7a6813df8319)
+
 5. Iniciar Visual Studio Code (VS Code) abriendo el folder de la solución como proyecto. En el proyecto ATM.Domain, si existe un archivo Class1.cs proceder a eliminarlo. Asimismo en el proyecto ATM.Domain.Tests si existiese un archivo UnitTest1.cs, también proceder a eliminarlo.
+![image](https://github.com/user-attachments/assets/ee9da92d-2c2a-464d-8f12-321780a6af42)
 
 6. Inicialmente se necesita implementar la clase Cuenta que se utilizara en todas los comandos del ATM. Para esto crear el archivo Account.cs en el proyecto ATM.Domain con el siguiente código:
 ```C#
@@ -260,6 +291,8 @@ namespace ATM.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/82a8796d-0fcc-4a4e-8044-e45bd5b1f498)
+
 7. Seguidamente se necesita implementar la interfaz principal para la generación de comandos, para esto crear el archivo ICommand.cs en el proyecto ATM.Domain con el siguiente código:
 ```C#
 namespace ATM.Domain
@@ -272,6 +305,8 @@ namespace ATM.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/5ee1b5bf-65af-4939-b2a2-674c41401990)
+
 8. Ahora se debe implementar cada una de clases correspondiente a los comandos de Retirar y Depositar para eso se deberan crear los siguientes archivos con el còdigo correspondiente:
 > WithdrawCommand.cs
 ```C#
@@ -293,6 +328,8 @@ namespace ATM.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/94e86d0b-72b6-4136-9362-285c001cc507)
+
 > DepositCommand.cs
 ```C#
 namespace ATM.Domain
@@ -313,6 +350,7 @@ namespace ATM.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/ab6dc3bc-069d-4efa-8fd4-21f4143018f0)
 
 8. Finalmente para unir todos los comandos crear la clase ATM que permitira el manejo de los comandos, crear el archivo ATM.cs en el proyecto ATM.Domain:
 ```C#
@@ -332,6 +370,7 @@ namespace ATM.Domain
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/2bb0eeb1-abb8-4d9a-964a-fbe5e27cf6fb)
 
 9. Para probar esta implementación, crear el archivo ATMTests.cs en el proyecto ATM.Domain.Tests:
 ```C#
@@ -361,14 +400,20 @@ namespace ATM.Domain.Tests
     }
 }
 ```
+![image](https://github.com/user-attachments/assets/7cea3aa1-86d4-4abc-9dd0-191e8e258580)
+
 10. Ahora necesitamos comprobar las pruebas contruidas para eso abrir un terminal en VS Code (CTRL + Ñ) o vuelva al terminal anteriormente abierto, y ejecutar el comando:
 ```Bash
 dotnet test --collect:"XPlat Code Coverage"
 ```
+![image](https://github.com/user-attachments/assets/b2ef3a95-c55e-4ddb-9815-98cb9bedd90d)
+
 11. Si las pruebas se ejecutaron correctamente debera aparcer un resultado similar al siguiente:
 ```Bash
 Correctas! - Con error:     0, Superado:     2, Omitido:     0, Total:     2, Duración: 5 ms
 ```
+![image](https://github.com/user-attachments/assets/47124d4f-09a2-40ec-80c4-2625fc2e311d)
+
 11. Revisemos como funciona el patrón de diseño Comando.
 
 ![image](https://github.com/UPT-FAING-EPIS/SI889_PDS/assets/10199939/50ecff5e-dc02-4b54-980f-8b72546b4129)
