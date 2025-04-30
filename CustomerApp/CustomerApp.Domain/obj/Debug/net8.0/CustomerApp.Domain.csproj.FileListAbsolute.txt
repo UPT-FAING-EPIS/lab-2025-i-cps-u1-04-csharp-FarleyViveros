@@ -1,0 +1,11 @@
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\bin\Debug\net8.0\CustomerApp.Domain.deps.json
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\bin\Debug\net8.0\CustomerApp.Domain.dll
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\bin\Debug\net8.0\CustomerApp.Domain.pdb
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\obj\Debug\net8.0\CustomerApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\obj\Debug\net8.0\CustomerApp.Domain.AssemblyInfoInputs.cache
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\obj\Debug\net8.0\CustomerApp.Domain.AssemblyInfo.cs
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\obj\Debug\net8.0\CustomerApp.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\obj\Debug\net8.0\CustomerApp.Domain.dll
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\obj\Debug\net8.0\refint\CustomerApp.Domain.dll
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\obj\Debug\net8.0\CustomerApp.Domain.pdb
+C:\Users\Farley\Desktop\CustomerApp\CustomerApp.Domain\obj\Debug\net8.0\ref\CustomerApp.Domain.dll

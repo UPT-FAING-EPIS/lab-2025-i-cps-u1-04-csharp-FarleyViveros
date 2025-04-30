@@ -1,0 +1,61 @@
+name: Release Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g. v1.0.0)'
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+
+    - name: Extract version from input
+      id: version
+      run: |
+        VERSION="${{ github.event.inputs.version }}"
+        CLEAN_VERSION="${VERSION#v}"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "clean_version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
+
+    - name: Restore dependencies
+      run: dotnet restore CustomerApp/CustomerApp.Domain/CustomerApp.Domain.csproj
+
+    - name: Re-pack NuGet Package for release
+      run: dotnet pack CustomerApp/CustomerApp.Domain/CustomerApp.Domain.csproj --configuration Release --output ./nupkgs
+
+    - name: Create GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        VERSION=${{ steps.version.outputs.version }}
+        echo "Creating GitHub Release for version $VERSION"
+        curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          -d "{\"tag_name\": \"$VERSION\", \"name\": \"Release $VERSION\", \"body\": \"Automated release for version $VERSION\", \"draft\": false, \"prerelease\": false}" \
+          https://api.github.com/repos/${{ github.repository }}/releases
+
+    - name: Upload .nupkg to GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        VERSION=${{ steps.version.outputs.version }}
+        CLEAN_VERSION=${{ steps.version.outputs.clean_version }}
+
+        RELEASE_ID=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+          https://api.github.com/repos/${{ github.repository }}/releases/tags/$VERSION | jq -r .id)
+
+        curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Content-Type: application/zip" \
+          --data-binary @./nupkgs/lab-2025-i-cps-u1-02-csharp-EdgardChambeT.$CLEAN_VERSION.nupkg \
+          "https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=lab-2025-i-cps-u1-02-csharp-EdgardChambeT.$CLEAN_VERSION.nupkg"
+
